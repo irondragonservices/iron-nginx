@@ -1,0 +1,25 @@
+# Scheduled. Rebuilds without a layer cache to pick up package updates that
+# never moved the base image tag, and re-scans what is published so a CVE
+# disclosed against an unchanged image still surfaces.
+name: refresh
+
+on:
+  schedule:
+    # Staggered across the fleet so ten repositories do not queue at once.
+    - cron: '43 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  security-events: write
+  issues: write
+
+jobs:
+  ci:
+    uses: irondragonservices/.github/.github/workflows/image-refresh.yml@main
+    with:
+      version-from: nginx
+    secrets:
+      dragonguard-token: ${{ secrets.DRAGONGUARD_TOKEN }}

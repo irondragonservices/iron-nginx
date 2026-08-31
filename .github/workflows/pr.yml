@@ -1,0 +1,17 @@
+# Caller. All the logic lives in irondragonservices/.github; this file only
+# says which upstream defines the version.
+name: pull request
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: irondragonservices/.github/.github/workflows/image-pr.yml@main
+    with:
+      version-from: nginx
+    secrets:
+      dragonguard-token: ${{ secrets.DRAGONGUARD_TOKEN }}

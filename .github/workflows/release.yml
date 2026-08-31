@@ -1,0 +1,22 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - LICENSE
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+  security-events: write
+
+jobs:
+  ci:
+    uses: irondragonservices/.github/.github/workflows/image-release.yml@main
+    with:
+      version-from: nginx
+    secrets:
+      dragonguard-token: ${{ secrets.DRAGONGUARD_TOKEN }}
