@@ -21,5 +21,3 @@ jobs:
     uses: irondragonservices/.github/.github/workflows/image-refresh.yml@main
     with:
       version-from: nginx
-    secrets:
-      dragonguard-token: ${{ secrets.DRAGONGUARD_TOKEN }}
