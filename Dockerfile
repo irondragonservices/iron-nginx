@@ -12,6 +12,11 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags '-w -s' -o /healthcheck .
 # image used to copy our official nginx binaries
 FROM nginx:1.30.4 AS base
 
+# Fail the whole pipeline on the first failure. Without this the `ldd | awk |
+# while read` below reports success even when ldd finds nothing, and the image
+# is built missing every library it was supposed to carry.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # create empty index page
 RUN echo 'Hello world' > /index.html
 
