@@ -13,5 +13,3 @@ jobs:
     uses: irondragonservices/.github/.github/workflows/image-pr.yml@main
     with:
       version-from: nginx
-    secrets:
-      dragonguard-token: ${{ secrets.DRAGONGUARD_TOKEN }}
