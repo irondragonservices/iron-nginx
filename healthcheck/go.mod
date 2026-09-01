@@ -1,3 +1,3 @@
 module github.com/irondragonservices/iron-nginx/healthcheck
 
-go 1.25
+go 1.25.14
