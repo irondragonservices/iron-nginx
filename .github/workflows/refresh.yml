@@ -22,4 +22,4 @@ jobs:
     with:
       version-from: nginx
     secrets:
-      dragonguard-token: ${{ secrets.DRAGONGUARD_TOKEN }}
+      dragonguard-private-key: ${{ secrets.DRAGONGUARD_APP_PRIVATE_KEY }}
