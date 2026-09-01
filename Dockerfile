@@ -1,5 +1,5 @@
 # image used for the healthcheck binary
-FROM golang:1.25-alpine AS gobuilder
+FROM golang:1.25-alpine@sha256:1ae0735f00daffa3aaf1363a5184c0d2dc55c78e3db4ec70241cdac97bf84b59 AS gobuilder
 WORKDIR /src
 COPY healthcheck/ ./
 # Static, so it runs in an image that has no loader guarantee of its own.
@@ -10,7 +10,7 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags '-w -s' -o /healthcheck .
 #
 
 # image used to copy our official nginx binaries
-FROM nginx:1.30.4 AS base
+FROM nginx:1.30.4@sha256:09cc2702709e6388d979d8030e3ab4eb1ceb699b2dced26d7543e872a822e823 AS base
 
 # Fail the whole pipeline on the first failure. Without this the `ldd | awk |
 # while read` below reports success even when ldd finds nothing, and the image
@@ -71,7 +71,7 @@ RUN rm -r /opt && mkdir /opt \
 # Distroless, matched to the Debian release the nginx image is built on. nginx
 # is copied out of that image as a dynamically linked binary, so a mismatched
 # glibc here is a container that exits before it logs anything.
-FROM gcr.io/distroless/base-debian13:nonroot
+FROM gcr.io/distroless/base-debian13:nonroot@sha256:d199d20fb09c898d8822ae5cbd5cf3c6d424e9b5e1fc2eb9a719a7752cd9d861
 
 # image owner label
 LABEL org.opencontainers.image.source="https://github.com/irondragonservices/iron-nginx"
