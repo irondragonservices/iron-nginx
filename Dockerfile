@@ -12,6 +12,21 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags '-w -s' -o /healthcheck .
 # image used to copy our official nginx binaries
 FROM nginx:1.30.4 AS base
 
+# Fail the whole pipeline on the first failure. Without this the `ldd | awk |
+# while read` below reports success even when ldd finds nothing, and the image
+# is built missing every library it was supposed to carry.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Patch the packages before lifting the libraries out. Whatever ships in the
+# upstream image is what gets copied, and upstream rebuilds its image on its own
+# schedule rather than on the security team's — so without this the hardened
+# image inherits every unpatched library the upstream tag happens to carry.
+# hadolint ignore=DL3008
+RUN apt-get update \
+    && apt-get upgrade -y --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # create empty index page
 RUN echo 'Hello world' > /index.html
 
