@@ -15,6 +15,6 @@ permissions:
 
 jobs:
   ci:
-    uses: irondragonservices/.github/.github/workflows/image-release.yml@main
+    uses: irondragonservices/.github/.github/workflows/image-release.yml@3ab64c35ed5d357c0b1285e23060035440a8d8e6 # main
     with:
       version-from: nginx
