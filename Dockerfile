@@ -71,7 +71,7 @@ RUN rm -r /opt && mkdir /opt \
 # Distroless, matched to the Debian release the nginx image is built on. nginx
 # is copied out of that image as a dynamically linked binary, so a mismatched
 # glibc here is a container that exits before it logs anything.
-FROM gcr.io/distroless/base-debian13:nonroot@sha256:d199d20fb09c898d8822ae5cbd5cf3c6d424e9b5e1fc2eb9a719a7752cd9d861
+FROM gcr.io/distroless/base-debian13:nonroot@sha256:0896741ba5bafd3ac87ea025a5f578952f2d238ddc3614cb368acc983a687aa2
 
 # image owner label
 LABEL org.opencontainers.image.source="https://github.com/irondragonservices/iron-nginx"
