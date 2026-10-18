@@ -10,7 +10,7 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags '-w -s' -o /healthcheck .
 #
 
 # image used to copy our official nginx binaries
-FROM nginx:1.31.6@sha256:60f0d4e986561e08804f75c211dcaf7fc5455699eada29f42cbe8a0a7253dd86 AS base
+FROM nginx:1.31.7@sha256:6c3fee1d7a4686ea271e9cc60d9c741cdfbc44ecf11d343025e1cff4c5522f47 AS base
 
 # Fail the whole pipeline on the first failure. Without this the `ldd | awk |
 # while read` below reports success even when ldd finds nothing, and the image
