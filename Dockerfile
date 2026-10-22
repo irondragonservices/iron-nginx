@@ -1,5 +1,5 @@
 # image used for the healthcheck binary
-FROM golang:1.27-alpine@sha256:d530cf60723abf1ffae0cd16bb546b379ec0550d2f3815e5b16ed69dbc00fba4 AS gobuilder
+FROM golang:1.27-alpine@sha256:b8c9b82affbbb82a020bbcf998dad2ba9516944ac7e883524642a481a9505e9c AS gobuilder
 WORKDIR /src
 COPY healthcheck/ ./
 # Static, so it runs in an image that has no loader guarantee of its own.
